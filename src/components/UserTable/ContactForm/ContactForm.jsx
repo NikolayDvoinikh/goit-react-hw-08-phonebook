@@ -28,7 +28,7 @@ const ContactForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const createdAt = new Date();
+
     if (
       contacts.filter(
         contact => contact.name.toLowerCase() === name.toLowerCase()
@@ -36,14 +36,15 @@ const ContactForm = () => {
     ) {
       return alert(`${name} is already in contacts`);
     }
-    dispatch(fetchAddContact({ ...state, createdAt }));
+
+    dispatch(fetchAddContact({ ...state }));
   };
 
   useEffect(() => {
     !loading && !error && setState({ ...initState });
   }, [loading, error]);
 
-  const isActiveBtn = state.name && state.phone ? loading : true;
+  const isActiveBtn = name && phone ? loading : true;
 
   return (
     <form className={css.form} onSubmit={handleSubmit}>

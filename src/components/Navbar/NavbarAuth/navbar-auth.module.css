@@ -1,0 +1,10 @@
+.link {
+  text-decoration: none;
+  padding: 10px;
+  list-style: none;
+  color: tomato;
+}
+
+.link:global(.active) {
+  font-weight: 700;
+}
