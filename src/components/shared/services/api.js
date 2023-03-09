@@ -2,10 +2,7 @@ import axios from 'axios';
 
 const instancePhoneBook = axios.create({
   baseURL: 'https://connections-api.herokuapp.com',
-  // baseURL: 'https://63fbaaf31ff79e133292e0ae.mockapi.io/contacts',
 });
-
-/*https://connections-api.herokuapp.com             /users/signup*/
 
 export const apiGetAllContacts = async () => {
   const { data } = await instancePhoneBook.get('/contacts');
@@ -31,7 +28,9 @@ export const apiUpdateContact = async contact => {
 };
 
 export const apiUserSignup = async data => {
-  return await instancePhoneBook.post('/users/signup', data);
+  const { data: result } = await instancePhoneBook.post('/users/signup', data);
+
+  return result;
 };
 
 export const apiUserLogin = async data => {

@@ -6,7 +6,7 @@ export const signup = createAsyncThunk(
   'auth/signup',
   async (data, { rejectWithValue }) => {
     try {
-      const { data: result } = await apiUserSignup(data);
+      const result = await apiUserSignup(data);
       return result;
     } catch ({ response }) {
       return rejectWithValue(response);
@@ -20,7 +20,7 @@ export const login = createAsyncThunk(
     try {
       const { data: result } = await apiUserLogin(data);
       return result;
-    } catch (response) {
+    } catch ({ response }) {
       return rejectWithValue(response);
     }
   }

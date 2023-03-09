@@ -1,8 +1,7 @@
 import useForm from 'components/shared/hooks/useForm';
 import initialState from './initialState';
 import fields from './fieldsType';
-import { nanoid } from 'nanoid';
-import { useMemo } from 'react';
+import InputField from 'components/shared/InputField/InputField';
 
 import css from './auth-form.module.css';
 
@@ -11,38 +10,20 @@ const AuthForm = ({ onSubmit }) => {
     initialState,
     onSubmit,
   });
+
   const { name, email, password } = state;
-  const id = () => nanoid();
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className={css.auth_form}>
-        <label htmlFor={id}>
-          <input
-            {...fields.name}
-            id={id}
-            onChange={handleChange}
-            value={name}
-          />
-        </label>
-        <label htmlFor={id}>
-          <input
-            {...fields.email}
-            id={id}
-            onChange={handleChange}
-            value={email}
-          />
-        </label>
-        <label htmlFor={id}>
-          <input
-            {...fields.password}
-            id={id}
-            onChange={handleChange}
-            value={password}
-          />
-        </label>
-      </form>{' '}
-    </div>
+    <form onSubmit={handleSubmit} className={css.auth_form}>
+      <InputField {...fields.name} onChange={handleChange} value={name} />
+      <InputField {...fields.email} onChange={handleChange} value={email} />
+      <InputField
+        {...fields.password}
+        onChange={handleChange}
+        value={password}
+      />
+      <button type="submit">Register</button>
+    </form>
   );
 };
 
