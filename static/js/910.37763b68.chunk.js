@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[910],{910:function(e,r,t){t.r(r);var o=t(184);r.default=function(){return(0,o.jsx)("h1",{children:"To make your phonebook active please register or login."})}}}]);
+//# sourceMappingURL=910.37763b68.chunk.js.map
