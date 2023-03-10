@@ -34,7 +34,8 @@ export const apiUserSignup = async data => {
 };
 
 export const apiUserLogin = async data => {
-  return await instancePhoneBook.post('/users/login', data);
+  const { data: result } = await instancePhoneBook.post('/users/login', data);
+  return result;
 };
 
 // https://63fbaaf31ff79e133292e0ae.mockapi.io/contacts
