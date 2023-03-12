@@ -1,7 +1,7 @@
-import useForm from 'components/shared/hooks/useForm';
+import useForm from 'shared/hooks/useForm';
 import initialState from './initialState';
 import fields from './fieldsType';
-import InputField from 'components/shared/InputField/InputField';
+import InputField from 'shared/components/InputField/InputField';
 
 import css from './auth-form.module.css';
 

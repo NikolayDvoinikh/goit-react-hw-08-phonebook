@@ -1,10 +1,10 @@
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-import Filter from 'components/Filter/Filter';
+import ContactForm from 'modules/UserTable/ContactForm/ContactForm';
+import ContactList from 'modules/UserTable/ContactList/ContactList';
+import Filter from 'modules/Filter/Filter';
 
 import css from './user-table.module.css';
 
-const UserTable = () => {
+const UserTablePage = () => {
   return (
     <div className={css.table_container}>
       <h1 className={css.title}>Phonebook</h1>
@@ -16,4 +16,4 @@ const UserTable = () => {
   );
 };
 
-export default UserTable;
+export default UserTablePage;

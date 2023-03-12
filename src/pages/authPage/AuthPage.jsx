@@ -1,5 +1,5 @@
-import AuthForm from 'Modules/AuthForm/AuthForm';
-import { signup } from 'Redux/auth/auth-operations';
+import AuthForm from 'modules/AuthForm/AuthForm';
+import { signup } from 'redux/auth/auth-operations';
 import { useDispatch } from 'react-redux';
 
 const AuthPage = () => {

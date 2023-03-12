@@ -20,6 +20,7 @@ export const contactsSlice = createSlice({
       })
       .addCase(fetchAllContacts.fulfilled, (store, { payload }) => {
         store.contacts = payload;
+
         store.isLoading = false;
       })
       .addCase(fetchAllContacts.rejected, (store, { payload }) => {
@@ -31,6 +32,7 @@ export const contactsSlice = createSlice({
         store.error = null;
       })
       .addCase(fetchAddContact.fulfilled, (store, { payload }) => {
+        console.log(payload);
         store.contacts = [...store.contacts, payload];
         store.isLoading = false;
       })

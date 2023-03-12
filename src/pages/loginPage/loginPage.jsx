@@ -1,6 +1,6 @@
-import LoginForm from 'Modules/LoginForm/LoginForm';
+import LoginForm from 'modules/LoginForm/LoginForm';
 import { useDispatch } from 'react-redux';
-import { login } from 'Redux/auth/auth-operations';
+import { login } from 'redux/auth/auth-operations';
 
 const LoginPage = () => {
   const dispatch = useDispatch();

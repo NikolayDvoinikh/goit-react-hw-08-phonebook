@@ -1,10 +1,10 @@
-import useForm from 'components/shared/hooks/useForm';
+import useForm from 'shared/hooks/useForm';
 
-import InputField from 'components/shared/InputField/InputField';
+import InputField from 'shared/components/InputField/InputField';
 
 import css from './login-form.module.css';
 import initialState from './initialState';
-import fields from './fields.Type';
+import fields from './fieldsType';
 
 const LoginForm = ({ onSubmit }) => {
   const { handleChange, state, handleSubmit } = useForm({
