@@ -3,6 +3,7 @@ import {
   fetchAllContacts,
   fetchAddContact,
   fetchDeleteContact,
+  fetchUpdateContact,
 } from './contacts-operations';
 
 export const contactsSlice = createSlice({
@@ -50,6 +51,19 @@ export const contactsSlice = createSlice({
         store.isLoading = false;
       })
       .addCase(fetchDeleteContact.rejected, (store, { payload }) => {
+        store.error = payload;
+        store.isLoading = false;
+      })
+      .addCase(fetchUpdateContact.pending, store => {
+        store.isLoading = true;
+        store.error = null;
+      })
+      .addCase(fetchUpdateContact.fulfilled, (store, { payload }) => {
+        const index = store.contacts.findIndex(({ id }) => id === payload.id);
+        store.contacts.splice(index, 1, payload);
+        store.isLoading = false;
+      })
+      .addCase(fetchUpdateContact.rejected, (store, { payload }) => {
         store.error = payload;
         store.isLoading = false;
       });

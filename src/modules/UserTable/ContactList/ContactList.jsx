@@ -28,8 +28,8 @@ const ContactList = () => {
     dispatch(fetchDeleteContact(id));
   };
 
-  const handleUpdate = id => {
-    dispatch(fetchUpdateContact(id));
+  const handleUpdate = data => {
+    dispatch(fetchUpdateContact({ id, data }));
   };
 
   const userList = useSelector(filterByName);
@@ -37,11 +37,13 @@ const ContactList = () => {
   const toggleModal = () => {
     setModal(prevState => !prevState);
   };
-  const initialState = { name: '', number: '' };
+
   const { handleChange, state, setState, handleSubmit } = useForm({
     initialState,
   });
+
   const { name, number } = state;
+  const contact = { id, name, number };
 
   const elements = userList.map(({ id, name, number }) => (
     <li key={id} className={css.item}>
@@ -74,8 +76,8 @@ const ContactList = () => {
         <ul className={css.listContacts}>
           {elements}
           {modal && (
-            <Modal close={toggleModal}>
-              <form onSubmit={handleUpdate}>
+            <Modal close={toggleModal} contact={contact}>
+              <form onSubmit={handleSubmit(handleUpdate)}>
                 <InputField
                   {...fields.name}
                   onChange={handleChange}

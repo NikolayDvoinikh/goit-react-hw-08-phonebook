@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 export const modalRoot = document.querySelector('#modal-root');
 
-const Modal = ({ close, children }) => {
+const Modal = ({ close, children, contact }) => {
   const onClose = useCallback(
     ({ target, currentTarget, code }) => {
       if (target === currentTarget || code === 'Escape') {

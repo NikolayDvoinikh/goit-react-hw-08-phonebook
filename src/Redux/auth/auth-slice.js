@@ -53,6 +53,7 @@ export const authSlice = createSlice({
         store.isLogin = true;
       })
       .addCase(current.rejected, (store, { payload }) => {
+        store.token = '';
         store.isLoading = false;
         store.error = payload;
       })
