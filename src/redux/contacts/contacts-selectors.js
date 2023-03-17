@@ -1,6 +1,6 @@
 export const getContactList = ({ contacts }) => contacts.contacts;
 
-export const filterByName = ({ contacts, filter }) => {
+export const filteredByName = ({ contacts, filter }) => {
   return contacts.contacts.filter(contact => {
     return contact.name.toLowerCase().includes(filter.toLowerCase());
   });

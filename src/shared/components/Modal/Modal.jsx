@@ -30,7 +30,7 @@ const Modal = ({ close, children }) => {
           color="secondary"
           sx={{
             cursor: 'pointer',
-            padding: '30px',
+            padding: '10px',
           }}
         />
 

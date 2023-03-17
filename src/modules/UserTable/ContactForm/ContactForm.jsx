@@ -38,6 +38,10 @@ const ContactForm = () => {
       return alert(`${name} is already in contacts`);
     }
 
+    if (contacts.filter(contact => contact.number === number).length) {
+      return alert(`${number} is already in contacts`);
+    }
+
     dispatch(fetchAddContact({ ...state }));
   };
 

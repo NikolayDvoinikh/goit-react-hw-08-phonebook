@@ -11,8 +11,9 @@ import {
 } from 'redux/contacts/contacts-operations';
 import { useEffect, useState, useCallback } from 'react';
 import {
-  getContactList,
+  filteredByName,
   selectLoader,
+  getContactList,
 } from 'redux/contacts/contacts-selectors';
 import InputField from 'shared/components/InputField/InputField';
 import {
@@ -56,18 +57,20 @@ const ContactList = () => {
     toggleModal();
   };
 
-  const userList = useSelector(getContactList);
+  const userList = useSelector(filteredByName);
+  const contacts = useSelector(getContactList);
 
   const [state, setState] = useState({ name: '', number: '' });
 
   const handleUpdate = e => {
     e.preventDefault();
 
-    const uniqContactName = userList.every(
-      ({ name, id }) => state.name !== name || contactId === id
+    const uniqContactName = contacts.every(
+      ({ name, id }) =>
+        state.name.toLowerCase() !== name.toLowerCase() || contactId === id
     );
 
-    const uniqContactNumber = userList.every(
+    const uniqContactNumber = contacts.every(
       ({ number, id }) => number !== state.number || id === contactId
     );
 
@@ -106,14 +109,13 @@ const ContactList = () => {
 
   const elements = userList.map(({ id, name, number }) => (
     <ListItem
-      sx={{ margin: '0', padding: '0', borderBottom: '1px solid' }}
+      disablePadding
+      sx={{ margin: '0', borderBottom: '1px solid' }}
       key={id}
     >
       <ListItemButton sx={{ margin: '0', cursor: 'default' }}>
-        <ListItemText>
-          {name}: {number}
-        </ListItemText>
-        <div>
+        <ListItemText primary={`${name}: ${number}`} />
+        <Box>
           <IconButton
             sx={{ marginRight: '5px' }}
             id={id}
@@ -132,14 +134,22 @@ const ContactList = () => {
           >
             Edit
           </Button>
-        </div>
+        </Box>
       </ListItemButton>
     </ListItem>
   ));
   return (
     <>
       {
-        <List sx={{ width: '100%', maxWidth: 360, margin: '0 auto' }}>
+        <List
+          sx={{
+            width: '100%',
+            maxWidth: 360,
+            margin: '0 auto',
+            maxHeight: '200px',
+            overflow: 'auto',
+          }}
+        >
           {elements}
           {modalDelete && (
             <Modal close={toggleModalDelete}>
@@ -172,7 +182,13 @@ const ContactList = () => {
                   onChange={handleChange}
                   value={state.number}
                 />
-                <button type="submit">Update</button>
+                <Button
+                  variant="outlined"
+                  type="submit"
+                  sx={{ margin: '10px auto', display: 'flex' }}
+                >
+                  Update
+                </Button>
               </form>
             </Modal>
           )}

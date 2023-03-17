@@ -2,17 +2,19 @@ import Navbar from './modules/Navbar/Navbar';
 import UserRoutes from './UserRoutes';
 import { Container } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { selectLoader } from 'redux/contacts/contacts-selectors';
+import { isAuthLoading } from 'redux/auth/auth-selectors';
 import css from './app.module.css';
 
 export const App = () => {
-  const loading = useSelector(selectLoader);
+  const loadingAuth = useSelector(isAuthLoading);
   return (
-    <div className={css.container}>
-      {!loading && <Navbar />}
-      <Container maxWidth="lg" sx={{ mt: '70px' }}>
-        <UserRoutes />
-      </Container>
-    </div>
+    !loadingAuth && (
+      <div className={css.container}>
+        <Navbar />
+        <Container maxWidth="lg" sx={{ mt: '70px' }}>
+          <UserRoutes />
+        </Container>
+      </div>
+    )
   );
 };
