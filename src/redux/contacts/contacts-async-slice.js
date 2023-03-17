@@ -21,7 +21,6 @@ export const contactsSlice = createSlice({
       })
       .addCase(fetchAllContacts.fulfilled, (store, { payload }) => {
         store.contacts = payload;
-
         store.isLoading = false;
       })
       .addCase(fetchAllContacts.rejected, (store, { payload }) => {

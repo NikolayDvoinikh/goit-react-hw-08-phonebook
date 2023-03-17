@@ -10,7 +10,10 @@ import {
   fetchUpdateContact,
 } from 'redux/contacts/contacts-operations';
 import { useEffect, useState, useCallback } from 'react';
-import { filterByName, selectLoader } from 'redux/contacts/contacts-selectors';
+import {
+  getContactList,
+  selectLoader,
+} from 'redux/contacts/contacts-selectors';
 import InputField from 'shared/components/InputField/InputField';
 import {
   Button,
@@ -19,8 +22,10 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Typography,
 } from '@mui/material';
 import { PersonRemove } from '@mui/icons-material';
+import { Box } from '@mui/system';
 
 const ContactList = () => {
   const [modal, setModal] = useState(false);
@@ -51,7 +56,7 @@ const ContactList = () => {
     toggleModal();
   };
 
-  const userList = useSelector(filterByName);
+  const userList = useSelector(getContactList);
 
   const [state, setState] = useState({ name: '', number: '' });
 
@@ -59,11 +64,11 @@ const ContactList = () => {
     e.preventDefault();
 
     const uniqContactName = userList.every(
-      ({ name, id }) => name !== state.name || id !== contactId
+      ({ name, id }) => state.name !== name || contactId === id
     );
 
     const uniqContactNumber = userList.every(
-      ({ number, id }) => number !== state.number || id !== contactId
+      ({ number, id }) => number !== state.number || id === contactId
     );
 
     if (!uniqContactName) {
@@ -138,9 +143,20 @@ const ContactList = () => {
           {elements}
           {modalDelete && (
             <Modal close={toggleModalDelete}>
-              <Button type="button" onClick={handleDelete}>
-                DELETE
-              </Button>
+              <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-around"
+              >
+                <Typography color="primary">Are you shure?</Typography>
+                <Button
+                  type="button"
+                  onClick={handleDelete}
+                  sx={{ color: 'red' }}
+                >
+                  DELETE
+                </Button>
+              </Box>
             </Modal>
           )}
           {modal && (

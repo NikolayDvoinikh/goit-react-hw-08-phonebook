@@ -1,7 +1,7 @@
 import css from './modal.module.css';
 import { createPortal } from 'react-dom';
 import { useEffect, useCallback } from 'react';
-import { Box, IconButton } from '@mui/material';
+import { Box } from '@mui/material';
 import { Close } from '@mui/icons-material';
 
 export const modalRoot = document.querySelector('#modal-root');
@@ -25,9 +25,15 @@ const Modal = ({ close, children }) => {
   return createPortal(
     <Box className={css.modal_backdrop} onClick={onClose}>
       <div className={css.modal_body}>
-        <IconButton type="button" onClick={onClose}>
-          <Close />
-        </IconButton>
+        <Close
+          onClick={onClose}
+          color="secondary"
+          sx={{
+            cursor: 'pointer',
+            padding: '30px',
+          }}
+        />
+
         {children}
       </div>
     </Box>,
