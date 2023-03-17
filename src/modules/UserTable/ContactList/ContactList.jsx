@@ -1,4 +1,3 @@
-import css from './ContactList.module.css';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import Modal from 'shared/components/Modal/Modal';
@@ -46,8 +45,9 @@ const ContactList = () => {
     setContactId('');
   };
 
-  const onModalEdit = id => {
+  const onModalEdit = (id, name, number) => {
     setContactId(id);
+    setState({ name, number });
     toggleModal();
   };
 
@@ -57,12 +57,26 @@ const ContactList = () => {
 
   const handleUpdate = e => {
     e.preventDefault();
-    const currentContact = userList.find(({ id }) => id === contactId);
+
+    const uniqContactName = userList.every(
+      ({ name, id }) => name !== state.name || id !== contactId
+    );
+
+    const uniqContactNumber = userList.every(
+      ({ number, id }) => number !== state.number || id !== contactId
+    );
+
+    if (!uniqContactName) {
+      return alert('Name is already exist!!!');
+    }
+    if (!uniqContactNumber) {
+      return alert('Number is already exist!!!');
+    }
     const data = {
-      name: currentContact.name,
-      number: currentContact.number,
+      name: state.name,
+      number: state.number,
     };
-    dispatch(fetchUpdateContact({ id: currentContact.id, data }));
+    dispatch(fetchUpdateContact({ id: contactId, data }));
     toggleModal();
     setContactId('');
   };
@@ -108,9 +122,8 @@ const ContactList = () => {
             variant="outlined"
             id={id}
             disabled={loading}
-            className={css.btn}
             type="button"
-            onClick={() => onModalEdit(id)}
+            onClick={() => onModalEdit(id, name, number)}
           >
             Edit
           </Button>

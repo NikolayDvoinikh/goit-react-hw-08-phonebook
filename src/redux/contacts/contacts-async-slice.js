@@ -58,8 +58,7 @@ export const contactsSlice = createSlice({
         store.error = null;
       })
       .addCase(fetchUpdateContact.fulfilled, (store, { payload }) => {
-        console.log(payload);
-        const index = store.contacts.findIndex(({ id }) => id === payload);
+        const index = store.contacts.findIndex(({ id }) => id === payload.id);
         store.contacts.splice(index, 1, payload);
         store.isLoading = false;
       })

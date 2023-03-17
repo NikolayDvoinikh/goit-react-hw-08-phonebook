@@ -20,7 +20,5 @@ export const apiUpdateContact = async ({ id, data }) => {
     `/contacts/${id}`,
     data
   );
-  console.log(id);
-  console.log(result);
   return result;
 };

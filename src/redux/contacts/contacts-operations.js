@@ -48,7 +48,6 @@ export const fetchUpdateContact = createAsyncThunk(
   async ({ id, data }, { rejectWithValue }) => {
     try {
       const resp = await apiUpdateContact({ id, data });
-      console.log(id);
       return resp;
     } catch ({ response }) {
       rejectWithValue(response);
