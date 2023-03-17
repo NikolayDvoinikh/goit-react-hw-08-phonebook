@@ -1,0 +1,67 @@
+/* .form {
+  border: 2px solid;
+  width: 100%;
+  max-width: 300px;
+  padding: 40px;
+} */
+/* .label {
+  font-size: 24px;
+} */
+/* .input {
+  display: block;
+  margin-top: 20px;
+  width: 100%;
+} */
+.btnSubmit {
+  display: inline-block;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 120px;
+  color: aliceblue;
+  height: 35px;
+  background-color: rgb(71, 71, 228);
+  font-weight: 700;
+}
+
+.btnSubmit[disabled] {
+  cursor: default;
+  background-color: #fff;
+  border: 1px solid rgb(189, 184, 184);
+  color: rgb(189, 184, 184);
+}
+
+.btnSubmit[disabled]:active {
+  background-color: #fff;
+  scale: none;
+  color: rgb(189, 184, 184);
+}
+
+.btnSubmit:active {
+  scale: 1.1;
+}
+
+.loadBtn {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.loading {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 3px solid rgb(239, 239, 240);
+  border-left-color: red;
+  animation: move 300ms linear infinite;
+}
+
+@keyframes move {
+  to {
+    transform: rotate(360deg);
+  }
+}
