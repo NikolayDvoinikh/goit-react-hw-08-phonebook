@@ -5,3 +5,5 @@ export const selectAuth = ({ auth }) => {
   return { isLogin, token };
 };
 export const isAuthLoading = ({ auth }) => auth.isLoading;
+export const isError = ({ auth }) => auth.error;
+export const resetMessage = ({ auth }) => auth.resetMessage;

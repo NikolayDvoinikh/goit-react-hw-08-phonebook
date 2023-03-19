@@ -3,21 +3,22 @@ import { fetchAddContact } from 'redux/contacts/contacts-operations';
 import {
   getContactList,
   selectLoader,
-  selectError,
 } from 'redux/contacts/contacts-selectors';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { initState } from './initState';
+import Message from 'shared/components/Message';
 
 import css from './ContactForm.module.css';
 import { Box, TextField } from '@mui/material';
 
 const ContactForm = () => {
   const [state, setState] = useState({ ...initState });
+  const [message, setMessage] = useState({ open: false, text: '' });
+
   const { name, number } = state;
 
   const contacts = useSelector(getContactList);
   const loading = useSelector(selectLoader);
-  const error = useSelector(selectError);
   const dispatch = useDispatch();
 
   const handleChange = ({ target }) => {
@@ -35,19 +36,17 @@ const ContactForm = () => {
         contact => contact.name.toLowerCase() === name.toLowerCase()
       ).length
     ) {
-      return alert(`${name} is already in contacts`);
+      setMessage({ open: true, text: `${name} is already exist` });
+      return;
     }
 
     if (contacts.filter(contact => contact.number === number).length) {
-      return alert(`${number} is already in contacts`);
+      return setMessage({ open: true, text: `${number} is already exist` });
     }
 
     dispatch(fetchAddContact({ ...state }));
+    setState({ ...initState });
   };
-
-  useEffect(() => {
-    !loading && !error && setState({ ...initState });
-  }, [loading, error]);
 
   const isActiveBtn = name && number ? loading : true;
 
@@ -96,6 +95,13 @@ const ContactForm = () => {
           </div>
         )}
       </button>
+
+      <Message
+        isOpen={message.open}
+        handleClose={() => setMessage({ open: false, text: '' })}
+      >
+        {message.text}
+      </Message>
     </Box>
   );
 };

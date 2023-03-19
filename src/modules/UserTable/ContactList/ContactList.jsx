@@ -148,6 +148,7 @@ const ContactList = () => {
             margin: '0 auto',
             maxHeight: '200px',
             overflow: 'auto',
+            marginBottom: '60px',
           }}
         >
           {elements}

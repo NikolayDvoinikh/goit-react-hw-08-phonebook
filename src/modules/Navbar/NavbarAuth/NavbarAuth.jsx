@@ -12,7 +12,7 @@ const NavbarAuth = () => {
         Register
       </NavLink>
       <NavLink to="/login" className={css.link}>
-        Login
+        LogIn
       </NavLink>
     </Toolbar>
   );

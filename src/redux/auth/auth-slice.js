@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { login, signup, current, logout } from './auth-operations';
+import { login, signup, current, logout, resetError } from './auth-operations';
 
 const initialState = {
   user: {},
@@ -8,6 +8,7 @@ const initialState = {
   isLogin: false,
   isLoading: false,
   error: null,
+  resetMessage: false,
 };
 
 export const authSlice = createSlice({
@@ -28,6 +29,7 @@ export const authSlice = createSlice({
       .addCase(signup.rejected, (store, { payload }) => {
         store.error = payload;
         store.isLoading = false;
+        store.resetMessage = true;
       })
       .addCase(login.pending, store => {
         store.isLoading = true;
@@ -42,6 +44,7 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (store, { payload }) => {
         store.error = payload;
         store.isLoading = false;
+        store.resetMessage = true;
       })
       .addCase(current.pending, store => {
         store.isLoading = true;
@@ -70,6 +73,18 @@ export const authSlice = createSlice({
       .addCase(logout.rejected, (store, { payload }) => {
         store.isLoading = false;
         store.error = payload;
+      })
+      .addCase(resetError.pending, store => {
+        store.isLoading = true;
+        store.resetMessage = false;
+      })
+      .addCase(resetError.fulfilled, store => {
+        store.isLoading = false;
+        store.resetMessage = false;
+      })
+      .addCase(resetError.rejected, store => {
+        store.isLoading = false;
+        store.resetMessage = false;
       });
   },
 });

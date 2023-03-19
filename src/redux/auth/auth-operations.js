@@ -63,3 +63,15 @@ export const logout = createAsyncThunk(
     }
   }
 );
+
+export const resetError = createAsyncThunk(
+  'auth/resetError',
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await apiUserLogin();
+      return data;
+    } catch ({ response }) {
+      return rejectWithValue(response);
+    }
+  }
+)
